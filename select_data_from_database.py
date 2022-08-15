@@ -7,8 +7,19 @@ class DataFromDB:
     def select_data(selected_place):
         print('start selecting data from database')
 
-        query = "SELECT * FROM polish_market WHERE place LIKE '" + selected_place + "'"
-        df = pd.read_sql(query, DataFromDB.cnxn)
+        query = "SELECT * FROM polish_market WHERE "
+
+        if len(selected_place) == 1:
+            query = query + "place LIKE '" + selected_place[0] + "'"
+            df = pd.read_sql(query, DataFromDB.cnxn)
+        else:
+            list_len = len(selected_place) - 1
+            for i, place in enumerate(selected_place):
+                if i == list_len:
+                    query = query + "place LIKE '" + selected_place[i] + "'"
+                else:
+                    query = query + "place LIKE '" + selected_place[i] + "' OR "
+            df = pd.read_sql(query, DataFromDB.cnxn)
 
         print('data selected')
 
@@ -27,8 +38,7 @@ class DataFromDB:
 
 
 if __name__ == '__main__':
-    df = DataFromDB().import_places()
-    print(df.head())
-    df2 = DataFromDB.select_data(df.iloc[1,0])
-    print(df2.head())
+    list = ['Polska']
+    print(len(list))
+    print(DataFromDB.select_data(list))
 

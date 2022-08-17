@@ -30,21 +30,20 @@ def change_quater(s):
     return ''
 
 
-def upload_data(cnxn, cursor, df):
+def upload_data(con,cursor, df):
     print('starting upload to database')
     for index, row in df.iterrows():
-        cursor.execute(
-            "INSERT INTO polish_market (code, place, quater, transactions, area, year, m2_value, unit, date) values(?,?,?,?,?,?,?,?,?)",
-            row.code, row.place, row.quater, row.transactions, row.area, row.year, row.m2_value, row.unit, row.date)
-    cnxn.commit()
+        cursor.execute("INSERT INTO polish_market (code, place, quater, transactions, area, year, m2_value, unit, date) values(?,?,?,?,?,?,?,?,?)",
+                       (row.code, row.place, row.quater, row.transactions, row.area, row.year, row.m2_value, str(row.unit),str(row.date)))
+    con.commit()
     print('upload success')
-    cnxn.close()
+    con.close()
     print('connection closed')
 
 
 if __name__ == '__main__':
     print('starting csv upload')
     df_polish_market = add_csv('RYNE_3794_CREL_20220811161137.csv')
-    cnxn, cursor = cs.sql_connect()
-    upload_data(cnxn, cursor, df_polish_market)
+    con, cursor = cs.sql_connect()
+    upload_data(con, cursor, df_polish_market)
 

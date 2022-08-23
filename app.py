@@ -12,10 +12,9 @@ app = Dash(__name__)
 df_places = DataFromDB().import_places()
 
 app.layout = html.Div(children=[
-
     html.Label('Wybierz dane:'),
     dcc.Dropdown(
-        id = "input-places",
+        id="input-places",
         options=[
             {'label': i, 'value': i} for i in list(df_places.place)
         ],
@@ -23,26 +22,26 @@ app.layout = html.Div(children=[
         multi=True
     ),
     html.Br(),
-
     dcc.Graph(
         id='line-graph-market-data'
     ),
     html.Div(children='''
        Dane pochodzą z GUS.
-       
    ''')
 ])
+
+
 @app.callback(
-    Output(component_id='line-graph-market-data', component_property= 'figure'),
+    Output(component_id='line-graph-market-data', component_property='figure'),
     [Input(component_id='input-places', component_property='value')])
 def update_graph(input_places):
     if bool(input_places):
-        df = DataFromDB.select_data(input_places)
+        df = DataFromDB.select_data
         fig = px.line(data_frame=df,
                       x="date",
                       y="m2_value",
                       text="m2_value",
-                      title='Mediana cen za 1 m2 lokali mieszkalnych sprzedanych w ramach transakcji rynkowych',
+                      title='''Mediana cen za 1 m2 lokali mieszkalnych sprzedanych w ramach transakcji rynkowych''',
                       symbol='place',
                       color='place',
                       labels={

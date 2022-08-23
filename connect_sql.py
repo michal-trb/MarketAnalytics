@@ -1,6 +1,7 @@
-import pyodbc, sqlite3
+import sqlite3
 
 sessions = {}
+
 
 def sql_connect():
     print('starting connection with database')
@@ -10,5 +11,6 @@ def sql_connect():
     cursor = con.cursor()
     print('connection success')
     return con, cursor
+
 
 sql_connect()

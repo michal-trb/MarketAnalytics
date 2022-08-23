@@ -1,6 +1,6 @@
 import pandas as pd
-import pyodbc
 import connect_sql as cs
+
 
 def add_csv(link_csv):
     # upload csv file, drop unnesesery columns and NaN rows
@@ -30,7 +30,7 @@ def change_quater(s):
     return ''
 
 
-def upload_data(con,cursor, df):
+def upload_data(con, cursor, df):
     print('starting upload to database')
     for index, row in df.iterrows():
         cursor.execute("INSERT INTO polish_market (code, place, quater, transactions, area, year, m2_value, unit, date) values(?,?,?,?,?,?,?,?,?)",

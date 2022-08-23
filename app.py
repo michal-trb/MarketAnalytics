@@ -41,7 +41,7 @@ def update_graph(input_places):
                       x="date",
                       y="m2_value",
                       text="m2_value",
-                      title='''Mediana cen za 1 m2 lokali mieszkalnych sprzedanych w ramach transakcji rynkowych''',
+                      title='Mediana cen za 1 m2 lokali mieszkalnych sprzedanych w ramach transakcji rynkowych',
                       symbol='place',
                       color='place',
                       labels={

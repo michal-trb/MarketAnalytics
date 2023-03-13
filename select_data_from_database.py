@@ -4,30 +4,35 @@ import connect_sql as cs
 
 class DataFromDB:
 
-    @property
+    @staticmethod
     def select_data(selected_place):
         print('start selecting data from database')
         con, cursor = cs.sql_connect()
 
-        query = "SELECT * FROM polish_market WHERE "
+        query = """
+            SELECT pm.*, ps.salary_brutto
+            FROM polish_market pm
+            LEFT JOIN polish_salaries ps
+            ON pm.place = ps.place AND pm.date = ps.date
+            WHERE pm.place LIKE :selected_place
+            """
+        params = {'selected_place': selected_place[0]}
 
-        if len(selected_place) == 1:
-            query = query + "place LIKE '" + selected_place[0] + "'"
-            df = pd.read_sql(query, con)
-        else:
-            list_len = len(selected_place) - 1
-            for i, place in enumerate(selected_place):
-                if i == list_len:
-                    query += "place LIKE '" + selected_place[i] + "'"
-                else:
-                    query += "place LIKE '" + selected_place[i] + "' OR "
-            df = pd.read_sql(query, con)
+        if len(selected_place) > 1:
+            query += " OR " + " OR ".join(["pm.place LIKE :p%d" % i for i in range(1, len(selected_place))])
+            params.update({"p%d" % i: selected_place[i] for i in range(1, len(selected_place))})
+
+
+
+        df = pd.read_sql_query(query, con, params=params)
 
         print('data selected')
         con.close()
         return df
 
-    def import_places(self):
+
+    @staticmethod
+    def import_places():
         print('start selecting data from database')
         con, cursor = cs.sql_connect()
 
@@ -40,6 +45,6 @@ class DataFromDB:
 
 
 if __name__ == '__main__':
-    list = ['Polska']
-    print(len(list))
-    print(DataFromDB.select_data)
+    lista = ['POMORSKIE']
+    print(len(lista))
+    print(DataFromDB.select_data(lista).tail())

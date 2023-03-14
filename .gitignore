@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/MarketAnalytics/FileContentIndex
+/.vs/MarketAnalytics/v17
+/.vs/ProjectSettings.json
+/.vs/slnx.sqlite
+/.vs/tasks.vs.json
+/.vs/VSWorkspaceState.json
+/__pycache__
+/.vs/MarketAnalytics/config/applicationhost.config

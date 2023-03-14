@@ -13,7 +13,7 @@ class DataFromDB:
             SELECT pm.*, ps.salary_brutto
             FROM polish_market pm
             LEFT JOIN polish_salaries ps
-            ON pm.place = ps.place AND pm.date = ps.date
+            ON pm.code = ps.code
             WHERE pm.place LIKE :selected_place
             """
         params = {'selected_place': selected_place[0]}
@@ -48,3 +48,4 @@ if __name__ == '__main__':
     lista = ['POMORSKIE']
     print(len(lista))
     print(DataFromDB.select_data(lista).tail())
+

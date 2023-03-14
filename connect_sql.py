@@ -13,4 +13,3 @@ def sql_connect():
     return con, cursor
 
 
-sql_connect()

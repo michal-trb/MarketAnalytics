@@ -10,3 +10,8 @@
 /.vs/VSWorkspaceState.json
 /__pycache__
 /.vs/MarketAnalytics/config/applicationhost.config
+*.vsidx
+*.lock
+*.wsuo
+/.vs
+/geckodriver.log

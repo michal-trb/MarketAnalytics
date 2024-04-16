@@ -1,3 +1,1 @@
-Working app: https://sea-turtle-app-xieej.ondigitalocean.app/
-
-![analiza](https://user-images.githubusercontent.com/85738518/184647910-2e8b4fce-be21-433c-be6c-3c4b402cdf61.gif)
+![Nagrywanie 2024-04-16 191827](https://github.com/michal-trb/MarketAnalytics/assets/85738518/5ff3b4d4-896d-49c3-b117-4aabf1e6425e)
